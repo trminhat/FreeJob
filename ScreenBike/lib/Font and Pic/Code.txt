@@ -1,0 +1,75 @@
+    tft.setSwapBytes(true);
+    tft.fillScreen(TFT_BLACK);
+    tft.pushImage(72, 6, 176, 160, TSR_176x160);
+    
+    for (int y = 0; y < tft.height(); y += 5) {
+    tft.fillRect(0, y, tft.width(), 10, TFT_BLACK);  // Xóa từng dòng
+    delay(80);  // Tạo hiệu ứng
+    }    
+    tft.fillScreen(TFT_BLACK);
+
+    tft.setFreeFont(&Andromeda_Bold_Tiny_25); // Vol Max
+    tft.setTextColor(TFT_GREEN);
+    tft.drawString("13.0", 40, 5);
+    tft.setFreeFont(&Andromeda_Bold_Tiny_20);
+    tft.setTextColor(TFT_GREEN);
+    tft.drawString("V", 132, 13);
+    tft.setSwapBytes(true);
+    tft.pushImage(5, 22, 28, 15, GArrow_Up_28x15);
+
+    tft.setFreeFont(&Andromeda_Bold_Tiny_25); // Vol Normal
+    tft.setTextColor(TFT_ORANGE);
+    tft.drawString("12.0", 40, 65);
+    tft.setFreeFont(&Andromeda_Bold_Tiny_20);
+    tft.setTextColor(TFT_ORANGE);
+    tft.drawString("V", 132, 73);
+    tft.setSwapBytes(true);
+    tft.pushImage(0, 75, 34, 26, Accu_34x26);
+
+    tft.setFreeFont(&Andromeda_Bold_Tiny_25); // Vol Min
+    tft.setTextColor(TFT_YELLOW);
+    tft.drawString("10.0", 40, 128);
+    tft.setFreeFont(&Andromeda_Bold_Tiny_20);
+    tft.setTextColor(TFT_YELLOW);
+    tft.drawString("V", 132, 136);
+    tft.setSwapBytes(true);
+    tft.pushImage(5, 145, 28, 15, Arrow_Down_28x15);
+
+    tft.setFreeFont(&Andromeda_Bold_Tiny_20);// Timer 
+    tft.setTextColor(TFT_WHITE);
+    tft.drawString("00:10", 206, 0);
+    tft.setSwapBytes(true);
+    tft.pushImage(168, 3, 28, 33, Timer_28x33);
+
+   
+    // tft.fillRect(198, 51, 320, 16, TFT_WHITE);
+    tft.setFreeFont(&Andromeda_Bold_Tiny_10);// SHT30
+    tft.setTextColor(TFT_WHITE);
+    tft.drawString("40", 195,50);
+    tft.setSwapBytes(true);
+    tft.pushImage(220, 48, 26, 20, Temperature_Yellow_26x20);
+    tft.setSwapBytes(true);
+    tft.pushImage(175, 45, 14, 24, Temperature_Yellow_14x24);
+
+    tft.setFreeFont(&Andromeda_Bold_Tiny_10);// SHT30
+    tft.setTextColor(TFT_WHITE);
+    tft.drawString("40%", 280,50);
+    tft.setSwapBytes(true);
+    tft.pushImage(258, 48, 16, 19, Huminity_16x19);
+    
+
+    tft.setFreeFont(&Andromeda_Bold_Tiny_20);// Temp T1
+    tft.setTextColor(TFT_WHITE);
+    tft.drawString("100", 210,80);
+    tft.setSwapBytes(true);
+    tft.pushImage(275, 85, 38, 29, Temperature_Red_38x29);
+    tft.setSwapBytes(true);
+    tft.pushImage(170, 87, 36, 23, Engine_RED_36x23);
+
+    tft.setFreeFont(&Andromeda_Bold_Tiny_20);// Temp T2
+    tft.setTextColor(TFT_WHITE);
+    tft.drawString("100", 210,128);
+    tft.setSwapBytes(true);
+    tft.pushImage(275, 133, 38, 29, Temperature_Blue_38x29);
+    tft.setSwapBytes(true);
+    tft.pushImage(170, 135, 36, 23, Engine_Blue_36x23);
