@@ -1,4 +1,4 @@
-    tft.setSwapBytes(true);
+tft.setSwapBytes(true);
     tft.fillScreen(TFT_BLACK);
     tft.pushImage(72, 6, 176, 160, TSR_176x160);
     

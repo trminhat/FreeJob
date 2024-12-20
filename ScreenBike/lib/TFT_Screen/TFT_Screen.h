@@ -30,6 +30,7 @@
 #include "Huminity_16x19.h"
 #include "Engine_RED_36x23.h"
 #include "Engine_Blue_36x23.h"
+#include "TFT_Image.h"
 
 
 
@@ -63,12 +64,14 @@ private:
     Thermocouple *thermocouple1;
 
 public:
+
     TFT_Screen(ClosedCube_SHT31D &pSHT3XD, SHT31D pResult);
     void begin();
+    void drawLogo();
     void setBlackLight(bool _stateScreen);
     bool compareDataOnScreen(float a, float b);
     void showCounter(uint32_t hours, uint32_t minutes, uint32_t seconds,  int16_t x, int16_t y, uint16_t colour, uint16_t bg);
-    void showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldData, float newData, uint16_t x, uint16_t y, int32_t w, int32_t h, uint8_t decimal, uint16_t colour, uint32_t bg);
+    void showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float data, uint16_t x, uint16_t y, uint16_t fillX, uint16_t fillY, int32_t w, int32_t h, uint8_t decimal, uint16_t colour, uint32_t bg);
 
 };
 #endif

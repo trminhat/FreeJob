@@ -11,27 +11,28 @@ void TFT_Screen::begin()
     setBlackLight(false);
     tft.init();
     // tft.init(172, 320);
-    tft.fillScreen(TFT_BLACK);
     setBlackLight(true);
+    tft.fillScreen(TFT_BLACK);
 
     tft.setRotation(3);
+}
+
+void TFT_Screen::drawLogo()
+{
     /* Introduce the Logo */
     // tft.drawRGBBitmap(65, -30, LOGO, 172, 243);
-    // tft.setSwapBytes(true);
-    // tft.drawBitmap(0, 0, LOGO, 5, 5, TFT_WHITE);
-    // tft.pushImage(80, -30, 172, 243, LOGO);
-    // delay(3000);
-    // for (size_t y = 0; y < 243; y++)
-    // {
-    //     static uint16_t x = 0;
-    //     tft.fillRect(x, y, 243, 10, TFT_BLACK);
-    //     x += 1;
-    //     y += 1;
-    //     delay(20);
-    // }
-
+    tft.setSwapBytes(true);
+    tft.pushImage(80, -30, 172, 243, LOGO);
+    delay(2000);
+    for (size_t y = 0; y < 243; y++)
+    {
+        static uint16_t x = 0;
+        tft.fillRect(x, y, 243, 10, TFT_BLACK);
+        x += 1;
+        y += 1;
+        delay(20);
+    }
     tft.fillScreen(TFT_BLACK);
-    // tft.setFreeFont(&Andromeda_Bold24pt7b);
 }
 
 void TFT_Screen::setBlackLight(bool _stateScreen)
@@ -47,7 +48,7 @@ bool TFT_Screen::compareDataOnScreen(float a, float b)
     return int_a == int_b;
 }
 
-void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldData, float newData, uint16_t x, uint16_t y, int32_t w, int32_t h, uint8_t decimal, uint16_t colour, uint32_t bg)
+void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float data, uint16_t x, uint16_t y, uint16_t fillX, uint16_t fillY, int32_t w, int32_t h, uint8_t decimal, uint16_t colour, uint32_t bg)
 {
     //  compareDataOnScreen(oldData, newData);
     // tft.setFreeFont(&Andromeda_Bold24pt7b);
@@ -61,14 +62,11 @@ void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldD
         tft.setSwapBytes(true);
         tft.pushImage(5, 22, 28, 15, GArrow_Up_28x15);
 
-        tft.setFreeFont(&Andromeda_Bold_Tiny_20); // set font for numberic
+        tft.setFreeFont(&Andromeda_Bold_Tiny_25); // set font for numberic
 
-        if (oldData == newData)
-        {
-            tft.fillRect(x, y, w, h, bg);
-            tft.setTextColor(colour);
-            tft.drawFloat(oldData, decimal, x, y);
-        }
+        tft.fillRect(fillX, fillY, w, h, bg);
+        tft.setTextColor(colour);
+        tft.drawFloat(data, decimal, x, y);
         break;
 
     case VNow:
@@ -80,12 +78,9 @@ void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldD
 
         tft.setFreeFont(&Andromeda_Bold_Tiny_25); // set font for numberic
 
-        if (oldData == newData)
-        {
-            tft.fillRect(x, y, w, h, bg);
-            tft.setTextColor(colour);
-            tft.drawFloat(oldData, decimal, x, y);
-        }
+        tft.fillRect(fillX, fillY, w, h, bg);
+        tft.setTextColor(colour);
+        tft.drawFloat(data, decimal, x, y);
         break;
 
     case VMin:
@@ -95,14 +90,12 @@ void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldD
         tft.setSwapBytes(true);
         tft.pushImage(5, 145, 28, 15, Arrow_Down_28x15);
 
-        tft.setFreeFont(&Andromeda_Bold_Tiny_20); // set font for numberic
+        tft.setFreeFont(&Andromeda_Bold_Tiny_25); // set font for numberic
 
-        if (oldData == newData)
-        {
-            tft.fillRect(x, y, w, h, bg);
-            tft.setTextColor(colour);
-            tft.drawFloat(oldData, decimal, x, y);
-        }
+        tft.fillRect(fillX, fillY, w, h, bg);
+        tft.setTextColor(colour);
+        tft.drawFloat(data, decimal, x, y);
+
         break;
 
     case SHT30_TEMP:
@@ -112,12 +105,10 @@ void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldD
         tft.pushImage(220, 48, 26, 20, Temperature_Yellow_26x20);
         tft.pushImage(175, 45, 14, 24, Temperature_Yellow_14x24);
 
-        if (oldData == newData)
-        {
-            tft.fillRect(x, y, w, h, bg);
-            tft.setTextColor(colour);
-            tft.drawNumber(oldData, x, y);
-        }
+        tft.fillRect(fillX, fillY, w, h, bg);
+        tft.setTextColor(colour);
+        tft.drawNumber(data, x, y);
+
         break;
 
     case SHT30_HUMI:
@@ -127,12 +118,10 @@ void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldD
         tft.setSwapBytes(true);
         tft.pushImage(258, 48, 16, 19, Huminity_16x19);
 
-        if (oldData == newData)
-        {
-            tft.fillRect(x, y, w, h, bg);
-            tft.setTextColor(colour);
-            tft.drawNumber(oldData, x, y);
-        }
+        tft.fillRect(fillX, fillY, w, h, bg);
+        tft.setTextColor(colour);
+        tft.drawNumber(data, x, y);
+
         break;
 
     case THERMAL_1:
@@ -142,12 +131,10 @@ void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldD
         tft.pushImage(275, 85, 38, 29, Temperature_Red_38x29);
         tft.pushImage(170, 87, 36, 23, Engine_RED_36x23);
 
-        if (oldData == newData)
-        {
-            tft.fillRect(x, y, w, h, bg);
-            tft.setTextColor(colour);
-            tft.drawNumber(oldData, x, y);
-        }
+        tft.fillRect(fillX, fillY, w, h, bg);
+        tft.setTextColor(colour);
+        tft.drawNumber(data, x, y);
+
         break;
 
     case THERMAL_2:
@@ -157,102 +144,15 @@ void TFT_Screen::showData(uint8_t screen, uint16_t _tx, uint16_t _ty, float oldD
         tft.pushImage(275, 133, 38, 29, Temperature_Blue_38x29);
         tft.pushImage(170, 135, 36, 23, Engine_Blue_36x23);
 
-        if (oldData == newData)
-        {
-            tft.fillRect(x, y, w, h, bg);
-            tft.setTextColor(colour);
-            tft.drawNumber(oldData, x, y);
-        }
+        tft.fillRect(fillX, fillY, w, h, bg);
+        tft.setTextColor(colour);
+        tft.drawNumber(data, x, y);
+
         break;
 
     default:
         break;
     }
-
-    // if (title == "Vmax")
-    // {
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_20); // Vol Max
-    //     tft.setTextColor(colour);
-    //     tft.drawString("V", _tx, _ty);
-    //     tft.setSwapBytes(true);
-    //     tft.pushImage(5, 22, 28, 15, GArrow_Up_28x15);
-
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_20); // set font for numberic
-    // }
-
-    // if (title == "Vnow")
-    // {
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_20); // Vol Normal
-    //     tft.setTextColor(colour);
-    //     tft.drawString("V", _tx, _ty);
-    //     tft.setSwapBytes(true);
-    //     tft.pushImage(0, 75, 34, 26, Accu_34x26);
-
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_25); // set font for numberic
-    // }
-
-    // if (title == "Vmin")
-    // {
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_20); // Vol Min
-    //     tft.setTextColor(colour);
-    //     tft.drawString("V", _tx, _ty);
-    //     tft.setSwapBytes(true);
-    //     tft.pushImage(5, 145, 28, 15, Arrow_Down_28x15);
-
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_20); // set font for numberic
-    // }
-
-    // if (oldData == 0)
-    // {
-    //     tft.setTextColor(colour, bg);
-    //     tft.drawFloat(oldData, decimal, x, y);
-    // }
-
-    // if (title == "sht30TempC")
-    // {
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_10); // SHT30
-    //     tft.setTextColor(colour);
-    //     tft.setSwapBytes(true);
-    //     tft.pushImage(230, 48, 26, 20, Temperature_Yellow_26x20);
-    //     tft.pushImage(170, 45, 14, 24, Temperature_Yellow_14x24);
-    // }
-
-    // if (title == "sht30Humi")
-    // {
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_10); // SHT30
-    //     tft.setTextColor(colour);
-    //     tft.drawString("%", _tx, _ty);
-    //     tft.setSwapBytes(true);
-    //     tft.pushImage(260, 48, 16, 19, Huminity_16x19);
-    // }
-
-    // if (title == "thermal1")
-    // {
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_20); // Temp T1
-    //     tft.setTextColor(colour);
-    //     tft.setSwapBytes(true);
-    //     tft.pushImage(290, 85, 38, 29, Temperature_Red_38x29);
-    //     tft.pushImage(170, 87, 36, 23, Engine_RED_36x23);
-    // }
-
-    // if (title == "thermal2")
-    // {
-    //     tft.setFreeFont(&Andromeda_Bold_Tiny_20); // Temp T1
-    //     tft.setTextColor(colour);
-    //     tft.setSwapBytes(true);
-    //     tft.pushImage(290, 133, 38, 29, Temperature_Blue_38x29);
-    //     tft.pushImage(170, 135, 36, 23, Engine_Blue_36x23);
-    // }
-    // if (oldData == newData)
-    // {
-
-    //     // tft.setTextColor(colour, bg);
-    //     // tft.drawFloat(oldData, decimal, x, y);
-
-    //     tft.fillRect(x, y, w, h, bg);
-    //     tft.setTextColor(colour);
-    //     tft.drawFloat(oldData, decimal, x, y);
-    // }
 }
 
 void TFT_Screen::showCounter(uint32_t hours, uint32_t minutes, uint32_t seconds, int16_t x, int16_t y, uint16_t colour, uint16_t bg)
@@ -260,7 +160,6 @@ void TFT_Screen::showCounter(uint32_t hours, uint32_t minutes, uint32_t seconds,
     static int32_t prevMinutes = -1;
     static int32_t preHours = -1;
     static int32_t preSeconds = -1;
-
     tft.setSwapBytes(true);
     tft.pushImage(168, 3, 28, 33, Timer_28x33);
     tft.setFreeFont(&Andromeda_Bold_Tiny_20); // Timer

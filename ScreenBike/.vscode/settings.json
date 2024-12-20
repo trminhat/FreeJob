@@ -17,6 +17,13 @@
         "memory": "cpp",
         "type_traits": "cpp",
         "*.tcc": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "atomic": "cpp",
+        "cstdint": "cpp",
+        "optional": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp",
+        "cmath": "cpp"
     }
 }
