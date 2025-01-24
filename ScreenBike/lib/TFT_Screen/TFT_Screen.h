@@ -16,6 +16,7 @@
 #include "Andromeda_Bold_Tiny_10.h"
 #include "Andromeda_Bold_Tiny_20.h"
 #include "Andromeda_Bold_Tiny_25.h"
+#include "Andromeda_Bold_Tiny_15.h"
 
 /* Icon */
 #include "TSR_176x160.h"

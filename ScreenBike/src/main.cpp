@@ -276,6 +276,7 @@ void readSHT3XD()
   }
 }
 
+/* Read all of sensors here */
 void UpdateSensors_task(void *pvPara)
 {
   while (true)
@@ -283,8 +284,8 @@ void UpdateSensors_task(void *pvPara)
     readVoltage();
     delay(200);
 
-    readSHT3XD();
-    delay(200);
+    // readSHT3XD();
+    // delay(200);
 
     readThermalcouple();
     delay(200);
@@ -397,18 +398,18 @@ void TFTdisplay_task(void *pvPara)
     }
 
     /* Show Counter from Timer hanlder task */
-    screen.showCounter(hours, minutes, seconds, 206, 0, TFT_WHITE, TFT_BLACK);
+    screen.showCounter(hours, minutes, seconds, 173, 13, TFT_WHITE, TFT_BLACK);
 
-    /* Show Temperature and Humidity from SHT3 sensor */
-    if (isSHT30TempChange)
-    {
-      screen.showData(SHT30_TEMP, 0, 0, oldTempC, 195, 50, 195, 50, 25, 20, 1, TFT_WHITE, TFT_BLACK);
-    }
+    // /* Show Temperature and Humidity from SHT3 sensor */
+    // if (isSHT30TempChange)
+    // {
+    //   screen.showData(SHT30_TEMP, 0, 0, oldTempC, 195, 50, 195, 50, 25, 20, 1, TFT_WHITE, TFT_BLACK);
+    // }
 
-    if (isSHT30HumiChange)
-    {
-      screen.showData(SHT30_HUMI, 305, 50, oldHumi, 280, 50, 280, 50, 25, 20, 1, TFT_WHITE, TFT_BLACK);
-    }
+    // if (isSHT30HumiChange)
+    // {
+    //   screen.showData(SHT30_HUMI, 305, 50, oldHumi, 280, 50, 280, 50, 25, 20, 1, TFT_WHITE, TFT_BLACK);
+    // }
 
     /* Show Thermal1 and Thermal2 from MAX6775 sensor */
     if (isThermal1Change)
@@ -416,7 +417,7 @@ void TFTdisplay_task(void *pvPara)
       if (oldThermal1 >= 100)
       {
         x = 210;
-        y = 80;
+        y = 75;
         fillX = x;
         fillY = y;
         w = 65;
@@ -425,7 +426,7 @@ void TFTdisplay_task(void *pvPara)
       else
       {
         x = 220; // align center the numberic
-        y = 80;
+        y = 75;
         fillX = 210;
         fillY = y;
         w = 65;
